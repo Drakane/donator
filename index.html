@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liste Des Donateurs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Filtre :</h3>
+      <button class="filter active" data-filter="all">Tous les donateurs</button>
+      <button class="filter" data-filter="homme">Homme</button>
+      <button class="filter" data-filter="femme">Femme</button>
+
+      <h3>Trier par :</h3>
+      <button class="sort" data-sort="amount">Montant donné</button>
+      <button class="sort" data-sort="alpha">Ordre Alphabétique</button>
+    </aside>
+
+    <main class="content">
+      <h1>Liste Des Donateurs</h1>
+      <div class="cards" id="donateur">
+       
+      </div>
+    </main>
+  </div>
+ <script src="script.js"></script>
+</body>
+</html>
