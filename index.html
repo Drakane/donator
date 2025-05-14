@@ -10,12 +10,13 @@
   <div class="container">
     <div class="sidebar">
       <h3>Filtre :</h3>
-      <button class="filter" onclick="filter('all')">Tous les donateurs </button>
-      <button class="filter" onclick="filter('homme')">Homme</button>
-      <button class="filter" onclick="filter('femme')">Femme</button>
+   <!-- Filtres -->
+<button class="filter" data-filter="all">Tous les donateurs</button>
+<button class="filter" data-filter="homme">Homme</button>
+<button class="filter" data-filter="femme">Femme</button>
       <h3>Trier par :</h3>
-      <button class="sort" data-sort="amount">Montant donné</button>
-      <button class="sort" data-sort="alphabetical" >Ordre Alphabétique</button>
+<button class="sort" data-sort="amount">Montant donné</button>
+<button class="sort" data-sort="alphabetical">Ordre Alphabétique</button>
     </div>
     <main class="content">
       <h1>Liste Des Donateurs</h1>
