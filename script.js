@@ -15,7 +15,7 @@ async function fetchdata() {
 
   authors = data.results.map((author) => ({
     ...author,
-    amount: Math.floor(Math.random() * 9000), 
+    amount: Math.floor(Math.random() * 10000), 
   }));
 
   renderDonators();
