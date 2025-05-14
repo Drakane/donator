@@ -2,40 +2,28 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liste Des Donateurs</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-
   <div class="container">
-    <aside class="sidebar">
+    <div class="sidebar">
       <h3>Filtre :</h3>
-      <button class="filter active" data-filter="all">Tous les donateurs</button>
-      <button class="filter" data-filter="homme">Homme</button>
-      <button class="filter" data-filter="femme">Femme</button>
-
+      <button class="filter" onclick="filter('all')">Tous les donateurs </button>
+      <button class="filter" onclick="filter('homme')">Homme</button>
+      <button class="filter" onclick="filter('femme')">Femme</button>
       <h3>Trier par :</h3>
       <button class="sort" data-sort="amount">Montant donné</button>
-      <button class="sort" data-sort="alpha">Ordre Alphabétique</button>
-    </aside>
-
+      <button class="sort" data-sort="alphabetical" >Ordre Alphabétique</button>
+    </div>
     <main class="content">
       <h1>Liste Des Donateurs</h1>
-    <h2>name</h2>
-    <ul id="name"></ul>
-      <div class="cards" id="donateur">
-
-      </div>
+      <div class="cards" id="name"></div>
     </main>
   </div>
-
- <script src="script.js"></script>
- <script>
-//   const ul = document.getElementById('name');
-// name.innerHTML = `${data.name}`;
-
-</script>
+  <script src="script.js"></script>
+  <script></script>
 </body>
 </html>
+

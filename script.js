@@ -1,68 +1,122 @@
+// Variables
+let authors;
+let filterauthors;
+let currentFilter = "all";
+let currentGender = "all";
+let currentSort = "amount";
+const donatorList = document.querySelector("#donateur");
+
+// Fetch Data
 async function fetchdata() {
   const response = await fetch("https://randomuser.me/api/?results=50");
   const data = await response.json();
   console.log("data");
   console.log(data);
-
   return data;
 }
 
 fetchdata().then((data) => {
-  let authors = data.results;
+  authors = data.results;
+  renderDonators();
+});
 
-  console.log("authors");
+// Render Donators
+function renderDonators() {
+  let list = document.getElementById("name");
+  let authorslist = authors;
+  list.innerHTML = "";
   console.log(authors);
 
-  // eslint-disable-next-line array-callback-return
-  authors.map(function (author) {
+  if (filterauthors) {
+    authorslist = filterauthors;
+  }
+
+  authorslist.map(function (author) {
     let ul = document.createElement("ul");
     let name2 = document.createElement("h2");
+    let firstname = document.createElement("h2");
+    let email = document.createElement("p");
+    let location = document.createElement("p");
+    let phone = document.createElement("p");
+    let img = document.createElement("img");
+    let amount = document.createElement("p");
 
+    const randomAmount = (Math.random() * 9000).toFixed(0);
+
+    email.innerHTML = `${author.email}`;
     name2.innerHTML = `${author.name.last}`;
+    firstname.innerHTML = `${author.name.first}`;
+    location.innerHTML = `${author.location.city}`;
+    phone.innerHTML = `${author.phone}`;
+    img.src = `${author.picture.large}`;
+    img.alt = `${author.picture.large}`;
+    amount.innerHTML = `${randomAmount} €`;
+    amount.classList.add("amount");
 
+    ul.appendChild(img);
     ul.appendChild(name2);
+    ul.appendChild(firstname);
+    ul.appendChild(email);
+    ul.appendChild(location);
+    ul.appendChild(phone);
+    ul.appendChild(amount);
+    ul.classList.add("card");
 
     console.log("name");
     console.log(author.name.last);
     document.querySelector("#name").appendChild(ul);
   });
-});
-let currentFilter = "all";
-let currentSort = "amount";
+}
 
-const donatorList = document.querySelector("#donateur");
-const filterButtons = document.querySelectorAll(".filter");
+// Filter Function
+function filter(gender) {
+  switch (gender) {
+    case "femme":
+      const result = authors.filter((donator) => donator.gender === "female");
+      filterauthors = result;
+      renderDonators();
+      break;
 
-function renderDonators() {
-  let filtered = data.results.filter((d) => {
-    if (currentFilter === "all") return true;
-    return currentFilter === "homme"
-      ? d.gender === "homme"
-      : currentFilter === "femme"
-      ? d.gender === "femme"
-      : currentFilter === "all";
-  });
+    case "homme":
+      const result2 = authors.filter((donator) => donator.gender === "male");
+      filterauthors = result2;
+      renderDonators();
+      break;
 
-  if (currentSort === "amount") {
-    filtered.sort((a, b) => b.amount - a.amount);
-  } else {
-    filtered.sort((a, b) => a.name.localeCompare(b.name));
+    case "all":
+      filterauthors = authors;
+      renderDonators();
+      break;
+
+    case "alphabetical":
+      const result3 = authors.sort((a, b) =>
+        a.name.last.localeCompare(b.name.last)
+      );
+ console.log(result3);
+      break;
+      
   }
+}
 
-  donatorList.innerHTML = filtered
-    .map(
-      (d) => `
+// Render Donator List
+renderDonators();
+
+donatorList.innerHTML = filtered
+  .map(
+    (d) => `
       <div class="card">
-          <div class="amount">${d.amount.toFixed(2)} €</div>
-          <img src="${d.img || "default.jpg"}" alt="${d.name}" />
-          <div class="name">${author.name.last}</div>
-          <div class="info">${d.location}</div>
+          <div class="amount">${(Math.random() * 9000).toFixed(0)} €</div>
+          <img src="${d.picture.large}" alt="${d.name.first} ${d.name.last}" />
+          <div class="name">${d.name.first} ${d.name.last}</div>
+          <div class="info">${d.location.city}</div>
           <div class="info">${d.phone}</div>
+          <div class="info">${d.email}</div>
       </div>
   `
-    )
-    .join("");
-}
+  )
+  .join("");
+
+// Event Listeners
 document.querySelectorAll(".filter").forEach((btn) => {
   btn.addEventListener("click", () => {
     document
@@ -70,6 +124,7 @@ document.querySelectorAll(".filter").forEach((btn) => {
       .forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     currentFilter = btn.dataset.filter.toLowerCase();
+    renderDonators();
   });
 });
 
